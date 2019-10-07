@@ -1,18 +1,21 @@
-const express = require(express)
-// const db = require(knex.config)
+const express = require('express')
 
-const router = express.Router()
+const db = require('../data/dbConfig')
+router = express.Router()
+
+router = express.Router()
 
 router.get('/', (req, res) => {
-    db('cars')
-        .then(cars => {
-            res.json(cars)
+    db.select('*').from('cars')
+        .then(accounts => {
+            res.json(accounts)
         })
         .catch(err => {
-            res.json({
+            res.status(500).json({
                 error: err,
-                message: "could not get cars"
+                message: "can not find accounts"
             })
         })
-
 })
+
+module.exports = router
